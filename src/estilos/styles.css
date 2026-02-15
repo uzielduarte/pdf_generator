@@ -1,34 +1,66 @@
-body {
-    font-family: Helvetica, sans-serif;
-    margin: 0;
-    padding: 0;
-    color: #333;
-}
-.container {
-    padding: 20px;
-}
+/* Asegura que la tabla permita quiebres internos */
 table {
     width: 100%;
     border-collapse: collapse;
-    margin-top: 20px;
-}
-table tr:nth-child(even) {
-    background-color: beige;
+    table-layout: auto; /* Permite ajuste dinámico */
+    break-inside: auto;
 }
 
-th {
-    background-color: teal;
-    text-align: center;
-    padding: 10px;
-    color: white;
+/* Forzar a la fila a ser "rompible" */
+tr {
+    break-inside: auto !important;
+    page-break-inside: auto !important;
 }
+
+/* Importante: el contenido dentro de la celda no debe bloquear el salto */
 td {
     border-bottom: 1px solid #ddd;
     padding: 10px;
+    vertical-align: top;
+    
+    /* Esto permite que si hay mucho texto, se corte a la mitad */
+    break-inside: auto !important;
+    page-break-inside: auto !important;
+    overflow: visible !important;
+
+    word-break: break-all; /* Evita que palabras largas empujen el ancho */
+    white-space: normal;    /* Permite que el texto fluya hacia abajo */
 }
 
-.total-section {
-    text-align: right;
-    margin-top: 30px;
-    font-size: 1rem;
+/* Evita que el contenedor restrinja el flujo */
+.container {
+    display: block;
+    overflow: visible;
+}
+
+@media print {
+
+  html, body {
+    height: auto;
+  }
+
+  .container {
+    display: block;
+    overflow: visible !important;
+    break-inside: auto !important;
+  }
+
+  .table {
+    display: block;
+    break-inside: auto !important;
+  }
+
+  .row {
+    display: grid;
+    grid-template-columns: 45% 15% 20% 20%;
+    break-inside: auto !important;
+    page-break-inside: auto !important;
+  }
+
+  .cell {
+    padding: 10px;
+    border-bottom: 1px solid #ddd;
+    word-break: break-word;
+    overflow: visible !important;
+  }
 }

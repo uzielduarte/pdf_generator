@@ -1,40 +1,39 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <style>
-        {{{estilosExtra}}}
-    </style>
+  <style>
+    {{{estilosExtra}}}
+  </style>
 </head>
 <body>
-    <div class="container">
-        <h2>Detalle de la Cotización</h2>
-        <p><strong>Cliente:</strong> {{clientName}}</p>
-        <p><strong>Fecha:</strong> {{date}}</p>
+  <div class="container">
+    <h2>Detalle de la Cotización</h2>
+    <p><strong>Cliente:</strong> {{clientName}}</p>
+    <p><strong>Fecha:</strong> {{date}}</p>
 
-        <table>
-            <thead>
-                <tr>
-                    <th>Producto</th>
-                    <th>Cantidad</th>
-                    <th>Precio Unitario</th>
-                    <th>Subtotal</th>
-                </tr>
-            </thead>
-            <tbody>
-                {{#each items}}
-                <tr>
-                    <td>{{this.name}}</td>
-                    <td>{{this.quantity}}</td>
-                    <td>${{this.price}}</td>
-                    <td>${{this.subtotal}}</td>
-                </tr>
-                {{/each}}
-            </tbody>
-        </table>
+    <!-- Encabezado -->
+    <div class="table">
+      <div class="row header">
+        <div class="cell">Producto</div>
+        <div class="cell">Cantidad</div>
+        <div class="cell">Precio Unitario</div>
+        <div class="cell">Subtotal</div>
+      </div>
 
-        <div class="total-section">
-            <strong>Total: ${{total}}</strong>
-        </div>
+      <!-- Cuerpo -->
+      {{#each items}}
+      <div class="row">
+        <div class="cell">{{this.name}}</div>
+        <div class="cell">{{this.quantity}}</div>
+        <div class="cell">${{this.price}}</div>
+        <div class="cell">${{this.subtotal}}</div>
+      </div>
+      {{/each}}
     </div>
+
+    <div class="total-section">
+      <strong>Total: ${{total}}</strong>
+    </div>
+  </div>
 </body>
 </html>
